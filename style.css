@@ -30,6 +30,7 @@ h1 {
   background: white;
   padding: 10px;
   border-radius: 10px;
+  transition: 0.3s;
 }
 .product {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
