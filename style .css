@@ -1,22 +1,43 @@
 body {
-  background: black;
-  color: white;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
-.product {
+h1 {
   background: #222;
-  margin: 20px;
-  padding: 20px;
+  color: white;
+  padding: 15px;
+  margin: 0;
+}
+
+.product {
+  background: white;
+  margin: 20px auto;
+  padding: 15px;
+  width: 90%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.product img {
+  width: 100%;
   border-radius: 10px;
 }
 
-img {
-  width: 150px;
+button {
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
-button {
-  background: lime;
-  padding: 10px;
-  border: none;
+button:hover {
+  background: #1ebe5d;
 }
