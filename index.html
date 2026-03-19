@@ -6,95 +6,99 @@
 
 <style>
 body {
-    margin: 0;
     font-family: Arial;
-    background-image: url("01988_tarantulatree.jpg");
-    background-size: cover;
-    color: white;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: -1;
-}
-
-.container {
-    padding: 20px;
-}
-
-h1, h2 {
     text-align: center;
+    background: #f2f2f2;
 }
 
-.login {
-    text-align: center;
-}
-
-input {
-    padding: 8px;
-    margin: 5px;
+.product {
+    background: white;
+    margin: 10px auto;
+    padding: 10px;
+    width: 200px;
+    border-radius: 10px;
 }
 
 button {
     padding: 8px 12px;
-    background: green;
-    color: white;
-    border: none;
+    margin: 5px;
+    cursor: pointer;
 }
 
-.produkt {
-    background: rgba(255,255,255,0.1);
-    margin: 10px;
-    padding: 10px;
+#adminPanel {
+    display: none;
+    margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
 <h1>🛒 Dyqani Im</h1>
 
-<div class="login">
-    <input type="text" id="user" placeholder="Username">
-    <input type="password" id="pass" placeholder="Password">
+<!-- LOGIN -->
+<div>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
     <button onclick="login()">Hyr si Admin</button>
-    <p id="mesazhi"></p>
 </div>
 
-<hr>
+<p id="msg"></p>
 
+<!-- PRODUKTET -->
 <h2>Produktet</h2>
+<div id="products"></div>
 
-<div class="produkt">
-    📱 Telefon - 300€
-</div>
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+    <h2>Admin Panel</h2>
 
-<div class="produkt">
-    💻 Laptop - 700€
-</div>
+    <input id="pname" placeholder="Emri produktit">
+    <input id="pprice" placeholder="Çmimi">
+    <input id="pimg" placeholder="Link foto">
 
-<div class="produkt">
-    🍳 Kuzhinë - 50€
-</div>
-
+    <br>
+    <button onclick="addProduct()">Shto Produkt</button>
 </div>
 
 <script>
-function login() {
-    let username = document.getElementById("user").value;
-    let password = document.getElementById("pass").value;
+let products = [];
 
-    if(username === "admin" && password === "1234") {
-        document.getElementById("mesazhi").innerHTML = "✅ Mirësevjen Admin!";
+function login() {
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+
+    if(u === "admin" && p === "1234") {
+        document.getElementById("adminPanel").style.display = "block";
+        document.getElementById("msg").innerHTML = "✅ Mirë se erdhe Admin";
     } else {
-        document.getElementById("mesazhi").innerHTML = "❌ Gabim username ose password!";
+        document.getElementById("msg").innerHTML = "❌ Gabim!";
     }
+}
+
+function addProduct() {
+    let name = document.getElementById("pname").value;
+    let price = document.getElementById("pprice").value;
+    let img = document.getElementById("pimg").value;
+
+    products.push({name, price, img});
+    showProducts();
+}
+
+function showProducts() {
+    let html = "";
+
+    products.forEach(p => {
+        html += `
+        <div class="product">
+            <img src="${p.img}" width="150"><br>
+            <b>${p.name}</b><br>
+            ${p.price}€
+        </div>
+        `;
+    });
+
+    document.getElementById("products").innerHTML = html;
 }
 </script>
 
