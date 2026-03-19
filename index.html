@@ -1,64 +1,126 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-  <meta charset="UTF-8">
-  <title>Dyqani Im</title>
-  <style>
-    body { font-family: Arial; text-align: center; }
-    .products { display: flex; flex-wrap: wrap; justify-content: center; }
-    .product {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 10px;
-      width: 180px;
-    }
-    img { width: 150px; height: 150px; }
-    button { margin-top: 5px; }
-  </style>
+<meta charset="UTF-8">
+<title>Dyqani Im</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+.buttons button {
+  margin: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  background: white;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  width: 180px;
+}
+
+.product img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+button {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+#cart {
+  margin-top: 20px;
+}
+</style>
+
 </head>
 <body>
 
 <h1>🛒 Dyqani Im</h1>
 
-<div>
+<div class="buttons">
   <button onclick="filterProducts('all')">Të gjitha</button>
-  <button onclick="filterProducts('men')">Meshkuj</button>
-  <button onclick="filterProducts('women')">Femra</button>
+  <button onclick="filterProducts('meshkuj')">Meshkuj</button>
+  <button onclick="filterProducts('femra')">Femra</button>
 </div>
 
-<div id="products" class="products"></div>
+<div id="products"></div>
 
 <h2>🛍️ Shporta</h2>
 <ul id="cart"></ul>
 
 <script>
+
 // PRODUKTET
-let products = [
+const products = [
   {
     name: "Këpucë Nike",
     price: 50,
-    category: "men",
+    category: "meshkuj",
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
   },
   {
     name: "Xhaketa",
     price: 120,
-    category: "men",
+    category: "meshkuj",
     image: "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59"
   },
   {
     name: "Çantë Femrash",
     price: 80,
-    category: "women",
+    category: "femra",
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
   }
 ];
+
+// MODELET (5 foto për secilin produkt)
+const models = {
+  "Këpucë Nike": [
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+    "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
+    "https://images.unsplash.com/photo-1519741497674-611481863552",
+    "https://images.unsplash.com/photo-1528701800489-20be3c7b3a3e",
+    "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a"
+  ],
+  "Xhaketa": [
+    "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59",
+    "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",
+    "https://images.unsplash.com/photo-1516822003754-cca485356ecb",
+    "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef",
+    "https://images.unsplash.com/photo-1544441893-675973e31985"
+  ],
+  "Çantë Femrash": [
+    "https://images.unsplash.com/photo-1584917865442-de89df76afd3",
+    "https://images.unsplash.com/photo-1591561954557-26941169b49e",
+    "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
+    "https://images.unsplash.com/photo-1524499982521-1ffd58dd89ea",
+    "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03"
+  ]
+};
 
 let cart = [];
 
 // SHFAQ PRODUKTET
 function showProducts(list) {
-  let container = document.getElementById("products");
+  const container = document.getElementById("products");
   container.innerHTML = "";
 
   list.forEach(p => {
@@ -67,26 +129,40 @@ function showProducts(list) {
         <img src="${p.image}">
         <h3>${p.name}</h3>
         <p>${p.price}€</p>
-        <button onclick="addToCart('${p.name}', ${p.price})">
-          Shto në shportë
-        </button>
+        <button onclick="addToCart('${p.name}', ${p.price})">Shto në shportë</button>
         <br>
-        <button onclick="showModels('${p.name}')">
-          Shfaq modele
-        </button>
+        <button onclick="showModels('${p.name}')">Shfaq modele</button>
       </div>
     `;
   });
 }
 
-// FILTER
+// FILTRIM
 function filterProducts(category) {
   if (category === "all") {
     showProducts(products);
   } else {
-    let filtered = products.filter(p => p.category === category);
-    showProducts(filtered);
+    showProducts(products.filter(p => p.category === category));
   }
+}
+
+// SHFAQ MODELET
+function showModels(name) {
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  models[name].forEach(img => {
+    container.innerHTML += `
+      <div class="product">
+        <img src="${img}">
+        <h3>${name}</h3>
+        <p>99€</p>
+        <button onclick="addToCart('${name}', 99)">Shto në shportë</button>
+      </div>
+    `;
+  });
+
+  container.innerHTML += `<br><button onclick="showProducts(products)">⬅ Kthehu</button>`;
 }
 
 // SHPORTA
@@ -96,7 +172,7 @@ function addToCart(name, price) {
 }
 
 function showCart() {
-  let lista = document.getElementById("cart");
+  const lista = document.getElementById("cart");
   lista.innerHTML = "";
 
   cart.forEach(item => {
@@ -104,58 +180,7 @@ function showCart() {
   });
 }
 
-// MODELET (5 foto për çdo produkt)
-function showModels(productName) {
-  const productsDiv = document.getElementById("products");
-  productsDiv.innerHTML = "";
-
-  const allModels = {
-    "Këpucë Nike": [
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-      "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
-      "https://images.unsplash.com/photo-1519741497674-611481863552",
-      "https://images.unsplash.com/photo-1528701800489-20be3c7c2f38",
-      "https://images.unsplash.com/photo-1584735175315-9d5df23860e6"
-    ],
-    "Xhaketa": [
-      "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59",
-      "https://images.unsplash.com/photo-1544441893-675973e31985",
-      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",
-      "https://images.unsplash.com/photo-1516822003754-cca485356ecb",
-      "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef"
-    ],
-    "Çantë Femrash": [
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3",
-      "https://images.unsplash.com/photo-1591561954557-26941169b49e",
-      "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03",
-      "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
-      "https://images.unsplash.com/photo-1524499982521-1ffd58dd89ea"
-    ]
-  };
-
-  let models = allModels[productName];
-  if (!models) return;
-
-  models.forEach(src => {
-    productsDiv.innerHTML += `
-      <div class="product">
-        <img src="${src}">
-        <h3>${productName}</h3>
-        <p>99€</p>
-        <button onclick="addToCart('${productName}', 99)">
-          Shto në shportë
-        </button>
-      </div>
-    `;
-  });
-
-  // BUTON BACK
-  productsDiv.innerHTML += `
-    <br><button onclick="showProducts(products)">Kthehu</button>
-  `;
-}
-
-// START
+// LOAD
 showProducts(products);
 
 </script>
