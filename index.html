@@ -45,7 +45,7 @@ button {
 }
 
 #cart {
-  margin-top: 20px;
+  margin-top: 20px;⁸
 }
 </style>
 </head>
@@ -93,25 +93,37 @@ button {
 <script>
 
 // 🔥 PRODUKTET (ME STORAGE)
-let products = JSON.parse(localStorage.getItem("products")) || [
-  {
-    name: "Këpucë Nike",
-    price: 50,
-    category: "meshkuj",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-  },
-  {
-    name: "Xhaketa",
-    price: 120,
-    category: "meshkuj",
-    image: "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59"
-  },
-  {
-    name: "Çantë Femrash",
-    price: 80,
-    category: "femra",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
+let products = [];
+
+try {
+  const saved = JSON.parse(localStorage.getItem("products"));
+  if (saved && Array.isArray(saved)) {
+    products = saved;
+  } else {
+    throw "empty";
   }
+} catch (e) {
+  products = [
+    {
+      name: "Këpucë Nike",
+      price: 50,
+      category: "meshkuj",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+    },
+    {
+      name: "Xhaketa",
+      price: 120,
+      category: "meshkuj",
+      image: "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59"
+    },
+    {
+      name: "Çantë Femrash",
+      price: 80,
+      category: "femra",
+      image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
+    }
+  ];
+}
 ];
 ];
 
