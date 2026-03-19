@@ -11,9 +11,7 @@ body {
   background: #f5f5f5;
 }
 
-h1 {
-  margin-top: 20px;
-}
+h1 { margin-top: 20px; }
 
 .buttons button {
   margin: 5px;
@@ -50,8 +48,8 @@ button {
   margin-top: 20px;
 }
 </style>
-
 </head>
+
 <body>
 
 <h1>🛒 Dyqani Im</h1>
@@ -66,9 +64,9 @@ button {
 
 <h2>🛍️ Shporta</h2>
 <ul id="cart"></ul>
+
 <div id="adminPanel">
   <h2>Admin Panel</h2>
-
   <input type="text" id="pname" placeholder="Emri produktit">
   <input type="number" id="pprice" placeholder="Çmimi">
   <input type="text" id="pimage" placeholder="Link i fotos">
@@ -81,6 +79,7 @@ button {
   <br><br>
   <button onclick="addProduct()">Shto Produkt</button>
 </div>
+
 <div id="auth">
   <input type="text" id="username" placeholder="Username">
   <input type="password" id="password" placeholder="Password">
@@ -90,9 +89,11 @@ button {
 </div>
 
 <p id="welcome"></p>
+
 <script>
-  // PRODUKTET
-const products = [
+
+// 🔥 PRODUKTET (ME STORAGE)
+let products = JSON.parse(localStorage.getItem("products")) || [
   {
     name: "Këpucë Nike",
     price: 50,
@@ -112,75 +113,61 @@ const products = [
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
   }
 ];
+
+// 🛒 SHPORTA
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// ✅ SHFAQ PRODUKTET
+function showProducts(list) {
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  list.forEach((p, index) => {
+    container.innerHTML += `
+      <div class="product">
+        <img src="${p.image}">
+        <h3>${p.name}</h3>
+        <p>${p.price}€</p>
+        <button onclick="addToCart('${p.name}', ${p.price})">Shto në shportë</button>
+        <br>
+        <button onclick="deleteProduct(${index})">❌ Fshij</button>
+      </div>
+    `;
+  });
+}
+
+// ➕ SHTO PRODUKT
 function addProduct() {
   const name = document.getElementById("pname").value;
   const price = document.getElementById("pprice").value;
   const image = document.getElementById("pimage").value;
   const category = document.getElementById("pcategory").value;
 
-  if(name && price && image && category){
+  if(name && price && image){
     products.push({
-      name: name,
+      name,
       price: Number(price),
-      category: category,
-      image: image
+      category,
+      image
     });
 
+    localStorage.setItem("products", JSON.stringify(products));
     showProducts(products);
 
-    // pastro fushat
     document.getElementById("pname").value = "";
     document.getElementById("pprice").value = "";
     document.getElementById("pimage").value = "";
   }
 }
-// MODELET (5 foto për secilin produkt)
-const models = {
-  "Këpucë Nike": [
-    "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-    "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
-    "https://images.unsplash.com/photo-1519741497674-611481863552",
-    "https://images.unsplash.com/photo-1528701800489-20be3c7b3a3e",
-    "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a"
-  ],
-  "Xhaketa": [
-    "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59",
-    "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",
-    "https://images.unsplash.com/photo-1516822003754-cca485356ecb",
-    "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef",
-    "https://images.unsplash.com/photo-1544441893-675973e31985"
-  ],
-  "Çantë Femrash": [
-    "https://images.unsplash.com/photo-1584917865442-de89df76afd3",
-    "https://images.unsplash.com/photo-1591561954557-26941169b49e",
-    "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
-    "https://images.unsplash.com/photo-1524499982521-1ffd58dd89ea",
-    "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03"
-  ]
-};
 
-let cart = [];
-
-// SHFAQ PRODUKTET
-function showProducts(list) {
-  const container = document.getElementById("products");
-  container.innerHTML = "";
-
-  list.forEach(p => {
-    container.innerHTML += `
-      <div class="product">
-        <img src="${p.image}" style="width:100%">
-        <h3>${p.name}</h3>
-        <p>${p.price}€</p>
-        <button onclick="addToCart('${p.name}', ${p.price})">Shto në shportë</button>
-        <br>
-        <button onclick="showModels('${p.name}')">Shfaq modele</button>
-      </div>
-    `;
-  });
+// ❌ FSHIJ PRODUKT
+function deleteProduct(index) {
+  products.splice(index, 1);
+  localStorage.setItem("products", JSON.stringify(products));
+  showProducts(products);
 }
 
-// FILTRIM
+// 🔍 FILTER
 function filterProducts(category) {
   if (category === "all") {
     showProducts(products);
@@ -189,31 +176,14 @@ function filterProducts(category) {
   }
 }
 
-// SHFAQ MODELET
-function showModels(name) {
-  const container = document.getElementById("products");
-  container.innerHTML = "";
-
-  models[name].forEach(img => {
-    container.innerHTML += `
-      <div class="product">
-        <img src="${img}">
-        <h3>${name}</h3>
-        <p>99€</p>
-        <button onclick="addToCart('${name}', 99)">Shto në shportë</button>
-      </div>
-    `;
-  });
-
-  container.innerHTML += `<br><button onclick="showProducts(products)">⬅ Kthehu</button>`;
-}
-
-// SHPORTA
+// 🛍️ SHTO NE SHPORTË
 function addToCart(name, price) {
   cart.push({name, price});
+  localStorage.setItem("cart", JSON.stringify(cart));
   showCart();
 }
 
+// 🧾 SHFAQ SHPORTËN
 function showCart() {
   const lista = document.getElementById("cart");
   lista.innerHTML = "";
@@ -223,9 +193,7 @@ function showCart() {
   });
 }
 
-// LOAD
-showProducts(products);
-// USER DATA
+// 🔐 LOGIN
 let user = null;
 
 function register() {
@@ -235,8 +203,6 @@ function register() {
   if(username && password){
     localStorage.setItem("user", JSON.stringify({username, password}));
     alert("U regjistrove!");
-  } else {
-    alert("Plotëso të dhënat!");
   }
 }
 
@@ -258,6 +224,13 @@ function logout() {
   user = null;
   document.getElementById("welcome").innerText = "";
 }
+
+// 🚀 LOAD
+window.onload = function() {
+  showProducts(products);
+  showCart();
+};
+
 </script>
 
 </body>
