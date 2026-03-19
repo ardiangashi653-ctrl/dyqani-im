@@ -6,7 +6,7 @@ body {
   background-image: url("01988_tarantulatree.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat; no-repeat;
+  background-repeat: no-repeat;
 }
 h1 {
   margin-top: 20px;
