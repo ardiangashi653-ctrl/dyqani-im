@@ -2,7 +2,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial;
-    background: blue;
+    background-image: url("01988_tarantulatree.jpg");
+background-size: cover;
+background-position: center;
 }
 h1 {
   margin-top: 20px;
