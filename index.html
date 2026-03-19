@@ -83,6 +83,8 @@ function addProduct() {
     let img = document.getElementById("pimg").value;
 
     products.push({name, price, img});
+  localStorage.setItem("products", JSON.stringify(products));
+  
     showProducts();
 }
 
