@@ -67,9 +67,19 @@ button {
 <h2>🛍️ Shporta</h2>
 <ul id="cart"></ul>
 
-<script>
+<h1>🛒 Dyqani Im</h1>
 
-// PRODUKTET
+<div id="auth">
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="register()">Regjistrohu</button>
+  <button onclick="login()">Hyr</button>
+  <button onclick="logout()">Dil</button>
+</div>
+
+<p id="welcome"></p>
+<script>
+  // PRODUKTET
 const products = [
   {
     name: "Këpucë Nike",
@@ -182,7 +192,39 @@ function showCart() {
 
 // LOAD
 showProducts(products);
+// USER DATA
+let user = null;
 
+function register() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if(username && password){
+    localStorage.setItem("user", JSON.stringify({username, password}));
+    alert("U regjistrove!");
+  } else {
+    alert("Plotëso të dhënat!");
+  }
+}
+
+function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  const savedUser = JSON.parse(localStorage.getItem("user"));
+
+  if(savedUser && username === savedUser.username && password === savedUser.password){
+    user = username;
+    document.getElementById("welcome").innerText = "Mirë se erdhe " + user;
+  } else {
+    alert("Gabim!");
+  }
+}
+
+function logout() {
+  user = null;
+  document.getElementById("welcome").innerText = "";
+}
 </script>
 
 </body>
