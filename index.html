@@ -66,7 +66,21 @@ button {
 
 <h2>🛍️ Shporta</h2>
 <ul id="cart"></ul>
+<div id="adminPanel">
+  <h2>Admin Panel</h2>
 
+  <input type="text" id="pname" placeholder="Emri produktit">
+  <input type="number" id="pprice" placeholder="Çmimi">
+  <input type="text" id="pimage" placeholder="Link i fotos">
+
+  <select id="pcategory">
+    <option value="meshkuj">Meshkuj</option>
+    <option value="femra">Femra</option>
+  </select>
+
+  <br><br>
+  <button onclick="addProduct()">Shto Produkt</button>
+</div>
 <div id="auth">
   <input type="text" id="username" placeholder="Username">
   <input type="password" id="password" placeholder="Password">
@@ -98,7 +112,28 @@ const products = [
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
   }
 ];
+function addProduct() {
+  const name = document.getElementById("pname").value;
+  const price = document.getElementById("pprice").value;
+  const image = document.getElementById("pimage").value;
+  const category = document.getElementById("pcategory").value;
 
+  if(name && price && image){
+    products.push({
+      name: name,
+      price: Number(price),
+      category: category,
+      image: image
+    });
+
+    showProducts(products);
+
+    // pastro fushat
+    document.getElementById("pname").value = "";
+    document.getElementById("pprice").value = "";
+    document.getElementById("pimage").value = "";
+  }
+}
 // MODELET (5 foto për secilin produkt)
 const models = {
   "Këpucë Nike": [
