@@ -19,7 +19,7 @@ h1 {
 
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100x, 1fr));
     gap: 20px;
     padding: 20px;
 }
