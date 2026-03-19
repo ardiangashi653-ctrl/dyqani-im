@@ -72,7 +72,23 @@
 <h2>🛒 Shporta</h2>
 <ul id="cart"></ul>
 
-<script src="script.js"></script>
+function addToCart(product) {
+    let cart = document.getElementById("cart");
+    let li = document.createElement("li");
+    li.textContent = product;
+    cart.appendChild(li);
+}
 
-</body>
-</html>
+function showCategory(category) {
+    let products = document.querySelectorAll(".product");
+
+    products.forEach(p => {
+        if (category === "all") {
+            p.style.display = "block";
+        } else if (p.classList.contains(category)) {
+            p.style.display = "block";
+        } else {
+            p.style.display = "none";
+        }
+    });
+}
