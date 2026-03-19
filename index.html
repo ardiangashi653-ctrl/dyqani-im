@@ -2,77 +2,77 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dyqani Im</title>
-
-<style>
-body {
-    font-family: Arial;
-    text-align: center;
-}
-
-.product {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin: 20px;
-    border-radius: 10px;
-}
-
-img {
-    width: 100%;
-    max-width: 220px;
-}
-
-button {
-    padding: 10px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <h1>Dyqani Im 🛒</h1>
 
-<div class="product">
-    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
-    <h2>Këpucë</h2>
-    <p>Çmimi: 50€</p>
-
-    <button onclick="addToCart('Këpucë', 50)">Shto në shportë</button>
+<!-- MENU -->
+<div class="menu">
+    <button onclick="showCategory('all')">Të gjitha</button>
+    <button onclick="showCategory('men')">Men</button>
+    <button onclick="showCategory('women')">Women</button>
 </div>
 
-<div class="product">
-    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-    <h2>Telefon</h2>
-    <p>Çmimi: 300€</p>
+<!-- PRODUKTET -->
+<div class="products">
 
-    <button onclick="addToCart('Telefon', 300)">Shto në shportë</button>
+    <!-- MEN -->
+    <div class="product men">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
+        <h2>Këpucë Boss</h2>
+        <p>Çmimi: 50€</p>
+        <button onclick="addToCart('Këpucë Boss - 50€')">Shto në shportë</button>
+    </div>
+
+    <div class="product men">
+        <img src="https://images.unsplash.com/photo-1520975922203-bc9b5b5b1c0f">
+        <h2>Xhaketë</h2>
+        <p>Çmimi: 120€</p>
+        <button onclick="addToCart('Xhaketë - 120€')">Shto në shportë</button>
+    </div>
+
+    <!-- WOMEN -->
+    <div class="product women">
+        <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47">
+        <h2>Çantë</h2>
+        <p>Çmimi: 80€</p>
+        <button onclick="addToCart('Çantë - 80€')">Shto në shportë</button>
+    </div>
+
+    <div class="product women">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+        <h2>Fustan</h2>
+        <p>Çmimi: 150€</p>
+        <button onclick="addToCart('Fustan - 150€')">Shto në shportë</button>
+    </div>
+
+    <!-- HAPËSIRA BOSHE (TI I MBUSH) -->
+    <div class="product men">
+        <img src="">
+        <h2>Produkt 1</h2>
+        <p>Çmimi: 0€</p>
+        <button onclick="addToCart('Produkt 1')">Shto në shportë</button>
+    </div>
+
+    <div class="product women">
+        <img src="">
+        <h2>Produkt 2</h2>
+        <p>Çmimi: 0€</p>
+        <button onclick="addToCart('Produkt 2')">Shto në shportë</button>
+    </div>
+
 </div>
 
+<!-- SHPORTA -->
 <h2>🛒 Shporta</h2>
 <ul id="cart"></ul>
 
-<script>
-let cart = [];
-
-function addToCart(product, price) {
-    cart.push({product, price});
-    displayCart();
-}
-
-function displayCart() {
-    let cartList = document.getElementById("cart");
-    cartList.innerHTML = "";
-
-    cart.forEach(item => {
-        let li = document.createElement("li");
-        li.textContent = item.product + " - " + item.price + "€";
-        cartList.appendChild(li);
-    });
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
