@@ -1,70 +1,56 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <title>Dyqani Im</title>
+<meta charset="UTF-8">
+<title>Dyqani Im</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-        }
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+}
 
-        .product {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin: 20px;
-            border-radius: 10px;
-        }
+.product {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 10px;
+}
 
-        img {
-            width: 100%;
-            max-width: 220px;
-        }
+img {
+    width: 100%;
+    max-width: 220px;
+}
 
-        button {
-            padding: 10px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-    </style>
+button {
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+</style>
+
 </head>
 
 <body>
 
 <h1>Dyqani Im 🛒</h1>
 
-<!-- KËPUCË -->
 <div class="product">
     <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
     <h2>Këpucë</h2>
     <p>Çmimi: 50€</p>
 
     <button onclick="addToCart('Këpucë', 50)">Shto në shportë</button>
-
-    <br><br>
-
-    <a href="https://wa.me/38345979807?text=Dua%20te%20porosis%20kepuce" target="_blank">
-        <button>Porosit në WhatsApp</button>
-    </a>
 </div>
 
-<!-- TELEFON -->
 <div class="product">
     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
     <h2>Telefon</h2>
     <p>Çmimi: 300€</p>
 
     <button onclick="addToCart('Telefon', 300)">Shto në shportë</button>
-
-    <br><br>
-
-    <a href="https://wa.me/38345979807?text=Dua%20te%20porosis%20telefon" target="_blank">
-        <button>Porosit në WhatsApp</button>
-    </a>
 </div>
 
-<!-- SHPORTA -->
 <h2>🛒 Shporta</h2>
 <ul id="cart"></ul>
 
