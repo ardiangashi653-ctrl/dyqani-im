@@ -3,125 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <title>Dyqani Im</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial; text-align: center; }
+    .products { display: flex; flex-wrap: wrap; justify-content: center; }
+    .product {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      width: 180px;
+    }
+    img { width: 150px; height: 150px; }
+    button { margin-top: 5px; }
+  </style>
 </head>
 <body>
 
-<h1>Dyqani Im 🛒</h1>
+<h1>🛒 Dyqani Im</h1>
 
-<div class="menu">
+<div>
   <button onclick="filterProducts('all')">Të gjitha</button>
-  <button onclick="filterProducts('men')">Men</button>
-  <button onclick="filterProducts('women')">Women</button>
+  <button onclick="filterProducts('men')">Meshkuj</button>
+  <button onclick="filterProducts('women')">Femra</button>
 </div>
 
 <div id="products" class="products"></div>
 
-<h2>🛒 Shporta</h2>
+<h2>🛍️ Shporta</h2>
 <ul id="cart"></ul>
 
 <script>
+// PRODUKTET
 let products = [
   {
     name: "Këpucë Nike",
     price: 50,
     category: "men",
-    image: "https://images.unsplash.com/photo-1"
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
   },
   {
     name: "Xhaketa",
     price: 120,
     category: "men",
-    image: "https://images.unsplash.com/photo-2"
+    image: "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59"
   },
   {
     name: "Çantë Femrash",
     price: 80,
     category: "women",
-    image: "https://images.unsplash.com/photo-3"
-  }
-];
-
-function filterProducts(category) {
-  const productsDiv = document.getElementById('products');
-  productsDiv.innerHTML = '';
-
-  const filtered = category === 'all' ? products : products.filter(p => p.category === category);
-
-  filtered.forEach(p => {
-    const div = document.createElement('div');
-    div.classList.add('product');
-
-    const img = document.createElement('img');
-    img.src = p.image;
-    div.appendChild(img);
-
-    const name = document.createElement('h3');
-    name.innerText = p.name;
-    div.appendChild(name);
-
-    const price = document.createElement('p');
-    price.innerText = p.price + '€';
-    div.appendChild(price);
-
-    // button për të shfaqur 5 modelet
-    const btn = document.createElement('button');
-    btn.innerText = 'Shfaq modele';
-    btn.onclick = () => showModels(p.name);
-    div.appendChild(btn);
-
-    productsDiv.appendChild(div);
-  });
-}
-
-function showModels(productName) {
-  const productsDiv = document.getElementById('products');
-  productsDiv.innerHTML = '';
-
-  // 5 foto shembull për çdo produkt
-  const models = [
-    'https://images.unsplash.com/photo-1',
-    'https://images.unsplash.com/photo-2',
-    'https://images.unsplash.com/photo-3',
-    'https://images.unsplash.com/photo-4',
-    'https://images.unsplash.com/photo-5'
-  ];
-
-  models.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.style.width = '150px';
-    img.style.height = '150px';
-    img.style.margin = '10px';
-    productsDiv.appendChild(img);
-  });
-}
-
-// shfaq të gjithë produktet në fillim
-filterProducts('all');
-  let products = [
-  {
-    name: "Këpucë Nike",
-    price: 50,
-    category: "men",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=60"
-  },
-  {
-  name: "Xhaketa",
-  price: 120,
-  category: "men",
-  image: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=500&q=60"
-},
-  {
-    name: "Çantë Femrash",
-    price: 80,
-    category: "women",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=500&q=60"
+    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3"
   }
 ];
 
 let cart = [];
 
+// SHFAQ PRODUKTET
 function showProducts(list) {
   let container = document.getElementById("products");
   container.innerHTML = "";
@@ -135,11 +70,16 @@ function showProducts(list) {
         <button onclick="addToCart('${p.name}', ${p.price})">
           Shto në shportë
         </button>
+        <br>
+        <button onclick="showModels('${p.name}')">
+          Shfaq modele
+        </button>
       </div>
     `;
   });
 }
 
+// FILTER
 function filterProducts(category) {
   if (category === "all") {
     showProducts(products);
@@ -149,6 +89,7 @@ function filterProducts(category) {
   }
 }
 
+// SHPORTA
 function addToCart(name, price) {
   cart.push({name, price});
   showCart();
@@ -163,8 +104,60 @@ function showCart() {
   });
 }
 
-// load fillestar
+// MODELET (5 foto për çdo produkt)
+function showModels(productName) {
+  const productsDiv = document.getElementById("products");
+  productsDiv.innerHTML = "";
+
+  const allModels = {
+    "Këpucë Nike": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+      "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
+      "https://images.unsplash.com/photo-1519741497674-611481863552",
+      "https://images.unsplash.com/photo-1528701800489-20be3c7c2f38",
+      "https://images.unsplash.com/photo-1584735175315-9d5df23860e6"
+    ],
+    "Xhaketa": [
+      "https://images.unsplash.com/photo-1520975922284-9c7a7f7c8b59",
+      "https://images.unsplash.com/photo-1544441893-675973e31985",
+      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",
+      "https://images.unsplash.com/photo-1516822003754-cca485356ecb",
+      "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef"
+    ],
+    "Çantë Femrash": [
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3",
+      "https://images.unsplash.com/photo-1591561954557-26941169b49e",
+      "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03",
+      "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
+      "https://images.unsplash.com/photo-1524499982521-1ffd58dd89ea"
+    ]
+  };
+
+  let models = allModels[productName];
+  if (!models) return;
+
+  models.forEach(src => {
+    productsDiv.innerHTML += `
+      <div class="product">
+        <img src="${src}">
+        <h3>${productName}</h3>
+        <p>99€</p>
+        <button onclick="addToCart('${productName}', 99)">
+          Shto në shportë
+        </button>
+      </div>
+    `;
+  });
+
+  // BUTON BACK
+  productsDiv.innerHTML += `
+    <br><button onclick="showProducts(products)">Kthehu</button>
+  `;
+}
+
+// START
 showProducts(products);
+
 </script>
 
 </body>
