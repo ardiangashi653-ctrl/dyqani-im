@@ -1,0 +1,22 @@
+body {
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+.product {
+  background: #222;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+img {
+  width: 150px;
+}
+
+button {
+  background: lime;
+  padding: 10px;
+  border: none;
+}
