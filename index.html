@@ -134,8 +134,9 @@ function addToCart(index) {
 function showCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let html = "";
-
+let total = 0;
     cart.forEach((p, i) => {
+        total += p.price;
         html += `
 <div>
   ${p.name} - ${p.price}€
@@ -143,6 +144,7 @@ function showCart() {
 </div>
 `;
     });
+    html += `<h3>Total: ${total}€</h3>`;
 document.getElementById("cart").innerHTML = html;
     } 
     function removeFromCart(index) {
