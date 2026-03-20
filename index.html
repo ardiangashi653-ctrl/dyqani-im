@@ -144,7 +144,16 @@ function showCart() {
 `;
     });
 document.getElementById("cart").innerHTML = html;
-    }    
+    } 
+    function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.splice(index, 1);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    showCart();
+    }
 function porosit() {
 
     let emri = document.getElementById("emri").value;
