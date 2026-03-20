@@ -108,7 +108,16 @@ document.getElementById("products")
 
 // KJO ËSHTË SHUMË E RËNDËSISHME
 showProducts();
+function orderProduct(index) {
+    let selected = products[index];
 
+    alert("Porosia u bë për: " + selected.name + " - " + selected.price + "€");
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    orders.push(selected);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+    }
 </script>
 
 </body>
