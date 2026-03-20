@@ -91,12 +91,13 @@ function addProduct() {
 function showProducts() {
     let html = "";
 
-    products.forEach(p => {
+  products.forEach((p, i) => { 
         html += `
         <div class="product">
             <img src="${p.img}" width="150"><br>
             <b>${p.name}</b><br>
-            ${p.price}€
+            ${p.price}€<br>
+<button onclick="orderProduct(${i})">Porosit</button>
         </div>
         `;
     });
