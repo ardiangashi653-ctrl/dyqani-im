@@ -117,8 +117,34 @@ function orderProduct(index) {
     orders.push(selected);
 
     localStorage.setItem("orders", JSON.stringify(orders));
-}
-</script>
+} 
+function porosit() {
 
+    let emri = document.getElementById("emri").value;
+    let telefoni = document.getElementById("telefoni").value;
+    let adresa = document.getElementById("adresa").value;
+
+    let porosia = {
+        emri: emri,
+        telefoni: telefoni,
+        adresa: adresa
+    };
+
+    let teDhenat = JSON.parse(localStorage.getItem("porosite")) || [];
+
+    teDhenat.push(porosia);
+
+    localStorage.setItem("porosite", JSON.stringify(teDhenat));
+
+    alert("Porosia u dergua me sukses!");
+    }
+    </script> 
+<h2>Porosit Produkt</h2>
+
+<input id="emri" placeholder="Emri"><br><br>
+<input id="telefoni" placeholder="Numri telefonit"><br><br>
+<input id="adresa" placeholder="Adresa"><br><br>
+
+<button onclick="porosit()">Dergo Porosi</button>
 </body>
 </html>
