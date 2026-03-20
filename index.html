@@ -109,6 +109,7 @@ document.getElementById("products")
 
 // KJO ËSHTË SHUMË E RËNDËSISHME
 showProducts();
+showCart();
 function orderProduct(index) {
     let selected = products[index];
 
@@ -129,7 +130,21 @@ function addToCart(index) {
     localStorage.setItem("cart", JSON.stringify(cart));
 
     alert("Produkti u shtua ne shporte!");
-}    
+}  
+function showCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let html = "";
+
+    cart.forEach((p) => {
+        html += `
+        <div>
+            ${p.name} - ${p.price}€
+        </div>
+        `;
+    });
+
+    document.getElementById("cart").innerHTML = html;
+    }    
 function porosit() {
 
     let emri = document.getElementById("emri").value;
