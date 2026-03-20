@@ -135,15 +135,15 @@ function showCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let html = "";
 
-    cart.forEach((p) => {
+    cart.forEach((p, i) => {
         html += `
-        <div>
-            ${p.name} - ${p.price}€
-        </div>
-        `;
+<div>
+  ${p.name} - ${p.price}€
+  <button onclick="removeFromCart(${i})">❌</button>
+</div>
+`;
     });
-
-    document.getElementById("cart").innerHTML = html;
+document.getElementById("cart").innerHTML = html;
     }    
 function porosit() {
 
