@@ -160,6 +160,15 @@ document.getElementById("cart").innerHTML = html;
 
     showCart();
     }
+    function toggleCart() {
+    let box = document.getElementById("cartBox");
+
+    if (box.style.display === "none") {
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+    }
 function porosit() {
 
     let emri = document.getElementById("emri").value;
