@@ -117,7 +117,18 @@ function orderProduct(index) {
     orders.push(selected);
 
     localStorage.setItem("orders", JSON.stringify(orders));
-} 
+}
+function addToCart(index) {
+    let product = products[index];
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push(product);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Produkti u shtua ne shporte!");
+}    
 function porosit() {
 
     let emri = document.getElementById("emri").value;
