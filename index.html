@@ -102,7 +102,7 @@ function showProducts() {
             <img src="${p.img}" width="150"><br>
             <b>${p.name}</b><br>
             ${p.price}€<br>     
-<button onclick="addToCart(${i})">Shto ne Shporte</button>
+<button onclick="openPopup('${p.name}', ${p.price})">Shiko</button>
         </div>
         `;
     });
