@@ -188,8 +188,43 @@ function porosit() {
     localStorage.setItem("porosite", JSON.stringify(teDhenat));
 
     alert("Porosia u dergua me sukses!");
+}
+    let selectedProduct = null;
+
+function openPopup(name, price) {
+    selectedProduct = { name: name, price: price };
+
+    document.getElementById("popupName").innerText = name;
+    document.getElementById("popupPrice").innerText = price + "€";
+
+    document.getElementById("productPopup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("productPopup").style.display = "none";
+}
+
+function addToCartFromPopup() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push(selectedProduct);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    closePopup();
+    showCart();
+
     }
-    </script> 
+</script>
+    <div id="productPopup" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:white; padding:15px; border-top:2px solid black;">
+    
+    <h3 id="popupName"></h3>
+    <p id="popupPrice"></p>
+
+    <button onclick="addToCartFromPopup()">Shto në Shportë</button>
+    <button onclick="closePopup()">Mbyll</button>
+
+    </div>
 <h2>Porosit Produkt</h2>
 
 <input id="emri" placeholder="Emri"><br><br>
