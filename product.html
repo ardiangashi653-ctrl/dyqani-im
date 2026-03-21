@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Produkti</title>
+</head>
+<body>
 
+<h2 id="name"></h2>
+<p id="price"></p>
+
+<button onclick="addToCart()">Shto në Shportë</button>
+<button onclick="goBack()">Kthehu</button>
+
+<script>
+let params = new URLSearchParams(window.location.search);
+let name = params.get("name");
+let price = params.get("price");
+
+document.getElementById("name").innerText = name;
+document.getElementById("price").innerText = price + "€";
+
+function addToCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({name: name, price: price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("U shtua në shportë!");
+}
+
+function goBack() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
